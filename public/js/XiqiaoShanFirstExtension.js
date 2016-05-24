@@ -1,6 +1,7 @@
 /**
  * Created by t_shanx on 5/24/2016.
  */
+
 XiqiaoShanFirstExtension = function (viewer,options) {
     Autodesk.Viewing.Extension.call(this,viewer,options);
     _self = this;
@@ -16,10 +17,10 @@ XiqiaoShanFirstExtension = function (viewer,options) {
     
 };
 
-XiqiaoShanFirstExtension.prototype = 
+XiqiaoShanFirstExtension.prototype =
     Object.create(Autodesk.Viewing.Extension.prototype);
 
-XiqiaoShanFirstExtension.prototype.constructor = 
+XiqiaoShanFirstExtension.prototype.constructor =
     XiqiaoShanFirstExtension;
 
 Autodesk.Viewing.theExtensionManager.registerExtension(

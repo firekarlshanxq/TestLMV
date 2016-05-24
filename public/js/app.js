@@ -9,7 +9,7 @@ function initialize() {
     //console.log(value);
     var options = {
 
-        //'env': 'AutodeskProduction',
+        env : 'AutodeskProduction',
         accessToken: value
         //you must provide token as url parameter: token=xxxxxxx
         //accessToken: Autodesk.Viewing.Private.getParameterByName("getToken()")
@@ -17,10 +17,10 @@ function initialize() {
     };
     console.log(options.accessToken);
     // replace with your own urn
-    var urn = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YWRuLTEwLjA3LjIwMTQtMTkuMDEuMzkvU2VhdC5kd2Y=';
+    var urn = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YnVja2V0eDEvdGVzdEZ1c2lvbiUyMHYxLmYzZA==';
 
     Autodesk.Viewing.Initializer(options, function () {
-        initializeViewer('viewer', urn, '3d');
+        initializeViewer('viewer', urn, 'viewable');
     });
 }
 
@@ -128,19 +128,23 @@ function initializeViewer(containerId, documentId, role) {
     viewer.start();
 
     viewer.impl.setLightPreset(8);
-
+    console .log(viewer);
     Autodesk.Viewing.Document.load(documentId,
 
-        function (document) {
-
-            var rootItem = document.getRootItem();
+        function (doc) {
+            var rootItem = doc.getRootItem();
 
             var geometryItems = Autodesk.Viewing.Document.getSubItemsWithProperties(
                 rootItem,
-                { 'type': 'geometry', 'role': role },
+                { 'type': 'folder', 'role': role },
                 true);
+            console.log(geometryItems[0]);
+            console.log(doc);
+            console.log(doc.getViewablePath(geometryItems[0]));
+/*            if(geometryItems.length > 0){
+                viewer.load(doc.getViewablePath(geometryItems[0]));
+            }*/
 
-            viewer.load(document.getViewablePath(geometryItems[0]));
         },
         // onErrorCallback
         function (msg) {
